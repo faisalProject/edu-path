@@ -11,14 +11,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('lessons', function (Blueprint $table) {
+        Schema::create('modules', function (Blueprint $table) {
             $table->id();
-            $table->string('lesson_name', 200);
-            $table->text('file');
-            $table->unsignedBigInteger('user_id');
-            $table->foreign('user_id')->on('users')->references('id')->onUpdate('cascade')->onDelete('cascade');
             $table->unsignedBigInteger('course_id');
-            $table->foreign('course_id')->on('courses')->references('id')->onUpdate('cascade')->onDelete('cascade');
+            $table->foreign('course_id')->references('id')->on('courses')->onUpdate('cascade')->onDelete('cascade');
+            $table->text('image');
+            $table->string('title', 200);
+            $table->text('description');
             $table->timestamps();
             $table->softDeletes()->nullable();
         });
@@ -29,6 +28,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('lessons');
+        Schema::dropIfExists('modules');
     }
 };
