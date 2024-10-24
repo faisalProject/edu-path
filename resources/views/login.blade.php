@@ -19,16 +19,17 @@
             <a href="/"><img src="../../images/edu-path.jpg" alt=""></a>
         </div>
         <div class="form-container">
-            <form action="" method="post">
-            <div class="form-el">
-                <div class="label">Email</div>
-                <input type="text" class="form-control" name="email" id="email">
-            </div>
-            <div class="form-el">
-                <div class="label">Password</div>
-                <input type="password" class="form-control" name="password" id="password">
-            </div>
-            <button type="submit" class="btn btn-primary">Masuk</button>
+            <form action="{{ route('login_to_system') }}" method="post">
+              @csrf
+              <div class="form-el">
+                  <div class="label">Email</div>
+                  <input type="text" class="form-control" name="email" id="email">
+              </div>
+              <div class="form-el">
+                  <div class="label">Password</div>
+                  <input type="password" class="form-control" name="password" id="password">
+              </div>
+              <button type="submit" class="btn btn-primary">Masuk</button>
             </form>
             <p>Belum mempunyai akun? <a href="register">Daftar</a></p>
         </div>

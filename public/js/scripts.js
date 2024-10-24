@@ -64,4 +64,27 @@ document.addEventListener('DOMContentLoaded', () => {
             e.preventDefault();
         })
     }) : null
+
+    var top_dropdown_profile = document.querySelector('.top-dropdown-profile');
+    var bottom_dropdown_profile = document.querySelector('.bottom-dropdown-profile')
+    var profile_chevron = document.querySelector('.profile-chevron');
+    top_dropdown_profile ? top_dropdown_profile.addEventListener('mousemove', () => {
+        profile_chevron.classList.add('active')
+        bottom_dropdown_profile.classList.add('active')
+    }) : null
+    
+    top_dropdown_profile ? top_dropdown_profile.addEventListener('mouseleave', () => {
+        profile_chevron.classList.remove('active')
+        bottom_dropdown_profile.classList.remove('active')
+    }) : null
+    
+    bottom_dropdown_profile ? bottom_dropdown_profile.addEventListener('mousemove', () => {
+        profile_chevron.classList.add('active')
+        bottom_dropdown_profile.classList.add('active')
+    }) : null;
+
+    bottom_dropdown_profile ? bottom_dropdown_profile.addEventListener('mouseleave', () => {
+        profile_chevron.classList.remove('active')
+        bottom_dropdown_profile.classList.remove('active')
+    }) : null;
 })

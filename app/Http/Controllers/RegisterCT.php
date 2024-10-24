@@ -5,12 +5,23 @@ namespace App\Http\Controllers;
 use App\Http\Requests\RegisterRequest;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use RealRashid\SweetAlert\Facades\Alert;
 
 class RegisterCT extends Controller
 {
     public function index() {
-        return view('register');
+        if ( Auth::check() ) {
+            if ( Auth::user()->role === 'superadmin' ) {
+                return redirect()->route('superadmin_dashboard');
+            } elseif ( Auth::user()->role === 'teacher' ) {
+                return redirect()->route('teacher_dashboard');
+            } elseif ( Auth::user()->role === 'user' ) {
+                return redirect()->route('user_dashboard');
+            }
+        } else {
+            return view('register');
+        }
     }
 
     public function store ( RegisterRequest $request )
@@ -32,8 +43,9 @@ class RegisterCT extends Controller
             return redirect()->route('register');
         }
 
-        User::create($user);
+        $new_user = User::create($user);
+        Auth::login($new_user);
         Alert::success('Berhasil', 'Akun berhasil didaftarkan');
-        return redirect()->route('login');
+        return redirect()->route('user_dashboard');
     }
 }
